@@ -1,7 +1,9 @@
-export default (url,data,method='GET')=>{
+import {config} from './config'
+
+export default function request(url,data,method='GET'){
     return new Promise((resolve,reject)=>{
         wx.request({
-            url,
+            url:config.mobileHost+url,
             data,
             method,
             success:(res)=>{

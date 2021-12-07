@@ -1,11 +1,38 @@
-// pages/logs/logs.js
+let startY =0,moveY=0,distance=0;
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        trans:"translateY(0)",
+        time:""
+    },
 
+    handleTouchStart(e){
+        startY = e.touches[0].clientY;
+        this.setData({
+            time:""
+        })
+    },
+    handleTouchMove(e){
+        moveY = e.touches[0].clientY;
+        distance = moveY-startY;
+        if(distance<0){
+            return;
+        }
+        else if(distance>120){
+            distance=120;
+        }
+        this.setData({
+            trans:`translateY(${distance}rpx)`
+        })
+    },
+    handleTouchEnd(e){
+        this.setData({
+            trans:"translateY(0)",
+            time:"transform 1s ease"
+        })
     },
 
     /**

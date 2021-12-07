@@ -1,37 +1,18 @@
-// pages/index/index.js
-import request from '../../utils/request'
+// pages/video/video.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        bannerList:[],
-        reccomendList:[],
-        topList:[]
+
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad:async function (options) {
-        
-          const banner = await request('/banner',{type:2});
-          const reccom = await request('/personalized',{limit:10});
-          this.setData({
-              bannerList:banner.banners,
-              reccomendList:reccom.result
-          })
-          let index=0;
-          const topList=[]
-          while(index<5){
-              const topListItem = await request('/top/list',{idx:index++});
-              const finalItem = { name: topListItem.playlist.name,tracks:topListItem.playlist.tracks.slice(0,3)};
-              topList.push(finalItem);
-              this.setData({
-                  topList
-              })
-          }
+    onLoad: function (options) {
+
     },
 
     /**
