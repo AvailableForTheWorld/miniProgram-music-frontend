@@ -1,7 +1,7 @@
 <view class="container">
     <view class="user-section">
         <image src="/static/images/personal/bgImg2.jpg"></image>
-        <view class="avatar">
+        <view class="avatar" bindtap="toLogin">
             <image src="/static/images/logo.png"></image>
             <text>游客</text>
         </view>

@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/index/index",
         "pages/my/my",
+        "pages/login/login",
+        "pages/index/index",
         "pages/video/video"
     ],
     "window": {
@@ -16,7 +17,8 @@
     "tabBar": {
         "color": "#555",
         "selectedColor": "#4b6ec1",
-        "list": [{
+        "list": [
+            {
                 "pagePath": "pages/index/index",
                 "text": "首页",
                 "iconPath": "/static/images/tabs/home.png",
@@ -34,7 +36,6 @@
                 "iconPath": "/static/images/tabs/tab-my.png",
                 "selectedIconPath": "/static/images/tabs/tab-my-current.png"
             }
-
         ]
     }
 }
