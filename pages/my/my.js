@@ -6,7 +6,8 @@ Page({
      */
     data: {
         trans:"translateY(0)",
-        time:""
+        time:"",
+        userInfo:{}
     },
 
     handleTouchStart(e){
@@ -43,7 +44,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        const userInfo = JSON.parse(wx.getStorageSync('userInfo'));
+        console.log(userInfo.avatarUrl)
+        this.setData({
+            userInfo
+        })
     },
 
     /**

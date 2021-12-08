@@ -41,7 +41,11 @@ Page({
         
         const result = await request('/login/cellphone',{phone,password});
         if(result.code===200){
-            wx.switchTab({
+            wx.showToast({
+              title: '登录成功'
+            })
+            wx.setStorageSync('userInfo', JSON.stringify(result.profile))
+            wx.reLaunch({
               url: '/pages/my/my',
             })
         }else if(result.code===400){
