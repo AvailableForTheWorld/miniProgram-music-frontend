@@ -1,20 +1,45 @@
-// pages/video/video.js
+import request from '../../utils/request'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        navTabList:[],
+        activeId:0,
+        videoListItem:[]
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-
+    onLoad:async function (options) {
+        const that = this
+        this.getVideoTab().then(function(res,rej){
+            that.getVideoList(that.data.activeId);
+        });
+        
     },
-
+    async getVideoTab(){
+        const nav = await request('/video/group/list',{isLogin:false})
+        this.setData({
+            navTabList:nav.data.slice(0,11),
+            activeId:nav.data[0].id
+        })
+        
+    },
+    async getVideoList(navId){
+        const videoList = await request('/video/group',{id:navId,isLogin:false})
+        this.setData({
+            videoListItem:videoList.datas
+        })
+    },
+    changeIndex(e){
+        
+        this.setData({
+            activeId:e.currentTarget.id-0
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

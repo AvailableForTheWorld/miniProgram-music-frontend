@@ -1,3 +1,5 @@
+import request from '../../utils/request'
+
 let startY =0,moveY=0,distance=0;
 Page({
 
@@ -7,7 +9,8 @@ Page({
     data: {
         trans:"translateY(0)",
         time:"",
-        userInfo:{}
+        userInfo:{},
+        playList:[]
     },
 
     handleTouchStart(e){
@@ -45,12 +48,19 @@ Page({
      */
     onLoad: function (options) {
         const userInfo = JSON.parse(wx.getStorageSync('userInfo'));
-        console.log(userInfo.avatarUrl)
         this.setData({
             userInfo
         })
+        this.getUid(userInfo.userId)
+        
     },
-
+    async getUid(userId){
+        const history = await request("/user/record",{uid:userId,type:0});
+        
+        this.setData({
+            playList:history.allData.slice(0,10)
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

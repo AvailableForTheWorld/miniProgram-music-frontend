@@ -39,7 +39,7 @@ Page({
             return;
         }
         
-        const result = await request('/login/cellphone',{phone,password});
+        const result = await request('/login/cellphone',{phone,password,isLogin:true});
         if(result.code===200){
             wx.showToast({
               title: '登录成功'
@@ -59,6 +59,7 @@ Page({
               icon:"error"
             })
         }else{
+            console.log(result)
             wx.showToast({
               title: '登录失败',
               icon:"error"
@@ -70,7 +71,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+      wx.removeStorageSync('cookies')
     },
 
     /**
