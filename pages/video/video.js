@@ -7,7 +7,8 @@ Page({
     data: {
         navTabList:[],
         activeId:0,
-        videoListItem:[]
+        videoListItem:[],
+        videoId:''
     },
 
     /**
@@ -20,6 +21,18 @@ Page({
         });
         
     },
+    handlePlay(e){
+        let vid = e.currentTarget.id;
+        if(this.videoContext&&this.vid&&this.vid!=vid)
+            this.videoContext.stop();
+        this.vid=vid;
+        this.setData({
+            videoId:vid
+        });
+        this.videoContext = wx.createVideoContext(vid);
+        this.videoContext.play();
+        
+    },
     async getVideoTab(){
         const nav = await request('/video/group/list',{isLogin:false})
         this.setData({
@@ -30,15 +43,21 @@ Page({
     },
     async getVideoList(navId){
         const videoList = await request('/video/group',{id:navId,isLogin:false})
+        wx.hideLoading()
         this.setData({
             videoListItem:videoList.datas
         })
     },
     changeIndex(e){
-        
+        let navId = e.currentTarget.id-0
         this.setData({
-            activeId:e.currentTarget.id-0
+            activeId:navId
         })
+        wx.showLoading({
+          title: '正在加载',
+          mask:true
+        });
+        this.getVideoList(navId)
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

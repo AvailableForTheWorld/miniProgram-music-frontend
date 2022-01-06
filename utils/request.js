@@ -4,7 +4,7 @@ console.log(wx.getStorageSync('cookies'))
 export default function request(url,data,method='GET'){
     return new Promise((resolve,reject)=>{
         wx.request({
-            url:config.mobileHost+url,
+            url:config.host+url,
             data,
             method,
             header:{
